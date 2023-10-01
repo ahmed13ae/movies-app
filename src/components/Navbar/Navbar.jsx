@@ -32,10 +32,10 @@ export default function Navbar() {
               <a className="nav-link" href="#"><i class="fa-brands fa-youtube"></i></a>
             </li>
 
-            <form className=" d-flex px-3" role="search">
+            <div className=" d-flex px-3" role="search">
           <input className="form-control me-2" type="search" placeHolder="Search" aria-label="Search" />
           <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </div>
 
 
           </ul>
