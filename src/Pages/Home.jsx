@@ -5,6 +5,9 @@ import { getMovies } from "../api/movies";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../store/slices/moviesSlice";
 import { useNavigate } from "react-router-dom";
+import PaginationComponent from "../components/PaginationComponent";
+
+
 
 export default function Home() {
   // const [movies, setMovies] = useState([]);
@@ -14,7 +17,7 @@ export default function Home() {
   //     setMovies(res.data.results);
   //   });
   // }, []);
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.movies.movies);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMovies());
@@ -78,6 +81,7 @@ export default function Home() {
               </div>
             );
           })}
+          <PaginationComponent/>
         </div>
       </div>
     </>

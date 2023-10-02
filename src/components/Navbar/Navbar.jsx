@@ -41,21 +41,7 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <a className="nav-link" to="#">
-                <i class="fa-brands fa-facebook"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i class="fa-brands fa-youtube"></i>
-              </a>
-            </li>
+            
 
             <div className=" d-flex px-3" role="search">
               <input
@@ -69,7 +55,7 @@ export default function Navbar() {
               <button
                 className="btn btn-outline-success"
                 type="submit"
-                onClick={() => dispatch(searchMovies(searchQuery))}
+                onClick={() => dispatch(searchMovies({query: searchQuery }))}
               >
                 Search
               </button>
