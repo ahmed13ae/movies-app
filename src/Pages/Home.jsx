@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../store/slices/moviesSlice";
 import { useNavigate } from "react-router-dom";
 import PaginationComponent from "../components/PaginationComponent";
+import { addTolist } from "../store/slices/watchListSlice";
 
 
 
@@ -75,7 +76,7 @@ export default function Home() {
                     >
                       {movie.release_date}
                     </div>
-                    <Button className="m-2" variant="warning">Add To Watch List</Button>{' '}
+                    <Button className="m-2" variant="warning" onClick={()=>{dispatch(addTolist(movie))}}>Add To Watch List</Button>{' '}
                   </Card>
                 </div>
               </div>

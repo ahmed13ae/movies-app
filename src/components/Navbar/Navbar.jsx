@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchMovies } from "../../store/slices/moviesSlice";
 
 export default function Navbar() {
+  const watchList = useSelector((state) => state.watchList);
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   return (
@@ -37,7 +38,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="watchlist">
-                Watch List
+                Watch List <span className="badge bg-secondary">{watchList.length}</span>
               </Link>
             </li>
 
