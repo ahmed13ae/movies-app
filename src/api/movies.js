@@ -8,3 +8,4 @@ export const getMovies = async (path) => {
         console.log('Error:', error);
     }
 }
+

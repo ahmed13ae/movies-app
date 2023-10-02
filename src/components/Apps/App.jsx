@@ -21,7 +21,7 @@ function App() {
         { path: 'home', element: <Home /> },
         
         { path: 'watchlist', element: <WatchList/> },
-        {path: 'movie',element: <Movie/>},
+        {path: '/movie-details/:id/:name',element: <Movie/>},
         { path: 'notfound', element: <NotFound/>}
 
 

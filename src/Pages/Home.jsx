@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { getMovies } from "../api/movies";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../store/slices/moviesSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   // const [movies, setMovies] = useState([]);
@@ -18,15 +19,19 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchMovies());
   }, []);
+  const navigate=useNavigate()
+  const redirectToDetails = (id, movieTitle, movie) => {
+    navigate(`/movie-details/${id}/${movieTitle}`, { state: { movie } });
+  }
 
   return (
     <>
       <div class="container overflow-hidden text-center">
-        {console.log(movies)}
+        
         <div class="row gy-5">
           {movies.map((movie, index) => {
             return (
-              <div class="col-3">
+              <div key={index} class="col-3">
                 <div class="p-3">
                   {" "}
                   <Card className="visible" style={{ width: "18rem" }}>
@@ -50,7 +55,7 @@ export default function Home() {
                     </div>
                     <div className="captions d-flex p-2">
                       <div className="">
-                        <h4>
+                        <h4 onClick={() => redirectToDetails(movie.id, movie.original_title, movie)}>
                           <strong>{movie.original_title}</strong>
                         </h4>
                       </div>
@@ -67,6 +72,7 @@ export default function Home() {
                     >
                       {movie.release_date}
                     </div>
+                    <Button className="m-2" variant="warning">Add To Watch List</Button>{' '}
                   </Card>
                 </div>
               </div>
