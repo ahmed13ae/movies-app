@@ -5,10 +5,10 @@ export const watchListSlice=createSlice({
     initialState:[],
     reducers:{
         addTolist: (state, action) => {
-            const foundProduct = state.find(
+            const foundMovie = state.find(
               (movie) => movie.id === action.payload.id
             );
-            if (!foundProduct) {
+            if (!foundMovie) {
                 state.push(action.payload);
             }
           },

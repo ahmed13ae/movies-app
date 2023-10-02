@@ -3,15 +3,15 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { getMovies } from "../api/movies";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../store/slices/moviesSlice";
+import { fetchMovies, toggleWatched } from "../store/slices/moviesSlice";
 import { useNavigate } from "react-router-dom";
 import PaginationComponent from "../components/PaginationComponent";
 import { addTolist } from "../store/slices/watchListSlice";
 
 
-
 export default function Home() {
-  // const [movies, setMovies] = useState([]);
+  
+   // const [movies, setMovies] = useState([]);
 
   // useEffect(() => {
   //   getMovies(`movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}`).then((res) => {
@@ -27,13 +27,16 @@ export default function Home() {
   const redirectToDetails = (id, movieTitle, movie) => {
     navigate(`/movie-details/${id}/${movieTitle}`, { state: { movie } });
   }
-
+    const handleAddToWatchList=(movie)=>{
+      dispatch(toggleWatched(movie.id))
+      dispatch(addTolist(movie))
+    }
   return (
     <>
       <div class="container overflow-hidden text-center">
-        
         <div class="row gy-5">
           {movies.map((movie, index) => {
+           
             return (
               <div key={index} class="col-3">
                 <div class="p-3">
@@ -59,15 +62,24 @@ export default function Home() {
                     </div>
                     <div className="captions d-flex p-2">
                       <div className="">
-                        <h4 onClick={() => redirectToDetails(movie.id, movie.original_title, movie)}>
+                        <h4
+                          onClick={() =>
+                            redirectToDetails(
+                              movie.id,
+                              movie.original_title,
+                              movie
+                            )
+                          }
+                        >
                           <strong>{movie.original_title}</strong>
                         </h4>
                       </div>
                       <div className="favourites ms-auto ">
-                        <i
+                    {!movie.watched?   
+                      <i
                           class="fa-regular fa-heart"
                           style={{ fontSize: "2em" }}
-                        ></i>
+                        ></i>:<i class="fa-solid fa-heart" style={{ fontSize: "2em",color: '#e4ef4e'}}></i>}
                       </div>
                     </div>
                     <div
@@ -76,13 +88,27 @@ export default function Home() {
                     >
                       {movie.release_date}
                     </div>
-                    <Button className="m-2" variant="warning" onClick={()=>{dispatch(addTolist(movie))}}>Add To Watch List</Button>{' '}
+                    {!movie.watched?<Button
+                      className="m-2"
+                      variant="warning"
+                      onClick={() => {handleAddToWatchList(movie)
+                      console.log(movie)
+                      }}
+                      
+                    >
+                      Add To Watch List
+                    </Button>:<button  className="btn btn-secondary " >
+                     already in watchlist
+                                  </button>
+
+                    }
+                    
                   </Card>
                 </div>
               </div>
             );
           })}
-          <PaginationComponent/>
+          <PaginationComponent />
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { clear } from "../store/slices/watchListSlice";
+import { clear, removeFromList } from "../store/slices/watchListSlice";
 
 export default function WatchList() {
   const movies = useSelector((state) => state.watchList);
@@ -64,7 +64,7 @@ export default function WatchList() {
                     >
                       {movie.release_date}
                     </div>
-                    <Button className="m-2" variant="danger" >Remove</Button>{' '}
+                    <Button className="m-2" variant="danger" onClick={()=>{dispatch(removeFromList(movie))}} >Remove</Button>{' '}
                   </Card>
                 </div>
               </div>
