@@ -52,10 +52,7 @@ export default function WatchList() {
                         </h4>
                       </div>
                       <div className="favourites ms-auto ">
-                        <i
-                          class="fa-regular fa-heart"
-                          style={{ fontSize: "2em" }}
-                        ></i>
+                      <i class="fa-solid fa-heart" style={{ fontSize: "2em",color: '#e4ef4e'}}></i>
                       </div>
                     </div>
                     <div
