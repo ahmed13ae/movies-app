@@ -18,6 +18,7 @@ export default function Home() {
   //     setMovies(res.data.results);
   //   });
   // }, []);
+  const watchlist=useSelector((state) => state.watchList)
   const movies = useSelector((state) => state.movies.movies);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,8 +29,16 @@ export default function Home() {
     navigate(`/movie-details/${id}/${movieTitle}`, { state: { movie } });
   }
     const handleAddToWatchList=(movie)=>{
-      dispatch(toggleWatched(movie.id))
       dispatch(addTolist(movie))
+    }
+    const inList=(checkedMovie)=>{
+      const foundMovie = watchlist.find(
+        (movie) => movie.id === checkedMovie.id
+      );
+      if (!foundMovie) {
+        return true;
+    }else{return false;}
+  
     }
   return (
     <>
@@ -75,7 +84,7 @@ export default function Home() {
                         </h4>
                       </div>
                       <div className="favourites ms-auto ">
-                    {!movie.watched?   
+                    {inList(movie)?   
                       <i
                           class="fa-regular fa-heart"
                           style={{ fontSize: "2em" }}
@@ -88,7 +97,7 @@ export default function Home() {
                     >
                       {movie.release_date}
                     </div>
-                    {!movie.watched?<Button
+                    {inList(movie)?<Button
                       className="m-2"
                       variant="warning"
                       onClick={() => {handleAddToWatchList(movie)

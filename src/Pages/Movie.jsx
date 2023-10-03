@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addTolist } from "../store/slices/watchListSlice";
 import { useState } from "react";
@@ -9,11 +9,12 @@ import { useEffect } from "react";
 import { getMovies } from "../api/movies";
 
 export default function Movie() {
+  const watchlist=useSelector((state) => state.watchList)
   const dispatch = useDispatch();
   const location = useLocation();
   const movie = location.state.movie;
   const handleAddToWatchList = (movie) => {
-    movie.watched = true;
+    
     dispatch(addTolist(movie));
   };
   const [recs, setRecs] = useState([]);
@@ -27,6 +28,15 @@ export default function Movie() {
   const navigate=useNavigate()
   const redirectToDetails = (id, movieTitle, movie) => {
     navigate(`/movie-details/${id}/${movieTitle}`, { state: { movie } });
+  }
+  const inList=(checkedMovie)=>{
+    const foundMovie = watchlist.find(
+      (movie) => movie.id === checkedMovie.id
+    );
+    if (!foundMovie) {
+      return true;
+  }else{return false;}
+
   }
   return (
     <>
@@ -46,7 +56,7 @@ export default function Movie() {
               </div>
               <div className="favourites ms-auto ">
                 {" "}
-                {!movie.watched ? (
+                {inList(movie) ? (
                   <i
                     class="fa-regular fa-heart"
                     style={{ fontSize: "2em" }}
@@ -76,13 +86,13 @@ export default function Movie() {
           </div>
 
           <div className="Button mt-4">
-            {!movie.watched ? (
+            {inList(movie) ? (
               <Button
                 className="m-2"
                 variant="warning"
                 onClick={() => {
                   handleAddToWatchList(movie);
-                  console.log(movie);
+                  
                 }}
               >
                 Add To Watch List
