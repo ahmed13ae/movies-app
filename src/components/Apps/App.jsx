@@ -19,10 +19,9 @@ function App() {
       children: [
         { index: true, element: <Home/> },
         { path: 'home', element: <Home /> },
-        // { path: 'register', element: <Register /> },
-        // { path: 'login', element: <Login /> },
+        
         { path: 'watchlist', element: <WatchList/> },
-        {path: 'movie',element: <Movie/>},
+        {path: '/movie-details/:id/:name',element: <Movie/>},
         { path: 'notfound', element: <NotFound/>}
 
 
