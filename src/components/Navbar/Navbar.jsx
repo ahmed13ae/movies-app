@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar navbar-expand-lg  ${styles.bgNavbar}`}>
       <div className="container">
-        <Link className="navbar-brand" to="#">
+        <Link className="navbar-brand" to="movies-app">
           Movies
         </Link>
         <button
@@ -31,7 +31,7 @@ export default function Navbar() {
               <Link
                 className="nav-link active"
                 aria-current="Linkage"
-                to="home"
+                to="movies-app"
               >
                 Home
               </Link>

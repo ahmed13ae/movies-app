@@ -18,7 +18,7 @@ function App() {
       errorElement: <NotFound />,
       children: [
         { index: true, element: <Home/> },
-        { path: 'home', element: <Home /> },
+        { path: 'movies-app', element: <Home /> },
         
         { path: 'watchlist', element: <WatchList/> },
         {path: '/movie-details/:id/:name',element: <Movie/>},
